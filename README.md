@@ -290,7 +290,7 @@ We welcome contributions! Please follow these steps:
 
 ## 📞 Contact | التواصل
 
-**Yasser Alsousi** | **ياسر الصوصي**
+**Yasser Alsousi** | **ياسر السوسى**
 - GitHub: [@YasserAlsousi](https://github.com/YasserAlsousi)
 - Email: yasserprogramer@hotmail.com
 
