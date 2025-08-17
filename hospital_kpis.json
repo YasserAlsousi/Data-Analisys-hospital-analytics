@@ -1,0 +1,39 @@
+{
+  "financial_kpis": {
+    "Total_Revenue": 45670000,
+    "Operating_Expenses": 42120000,
+    "Net_Income": 3550000,
+    "Operating_Margin": 7.8,
+    "EBITDA_Margin": 12.3,
+    "Cash_Flow": 4200000,
+    "Days_Cash_on_Hand": 187,
+    "Accounts_Receivable_Days": 45,
+    "Bad_Debt_Rate": 2.1,
+    "Cost_Per_Discharge": 8950,
+    "Revenue_Per_Bed": 145000
+  },
+  "quality_metrics": {
+    "Overall_Patient_Satisfaction": 4.6,
+    "HCAHPS_Score": 4.4,
+    "Mortality_Rate": 2.3,
+    "Infection_Rate": 1.8,
+    "Medication_Error_Rate": 0.5,
+    "Patient_Fall_Rate": 2.1,
+    "Pressure_Ulcer_Rate": 0.8,
+    "Hand_Hygiene_Compliance": 94.5,
+    "Core_Measures_Compliance": 96.2
+  },
+  "ed_metrics": {
+    "Total_ED_Visits": 31250,
+    "Door_to_Doctor_Time_Min": 18.5,
+    "Avg_Length_Stay_Hours": 4.2,
+    "Left_Without_Seen_Rate": 3.8,
+    "Triage_Level_1_Rate": 12.5,
+    "Triage_Level_2_Rate": 23.8,
+    "Triage_Level_3_Rate": 35.2,
+    "Triage_Level_4_Rate": 21.1,
+    "Triage_Level_5_Rate": 7.4,
+    "Admission_Rate": 18.6,
+    "Patient_Satisfaction_ED": 4.3
+  }
+}

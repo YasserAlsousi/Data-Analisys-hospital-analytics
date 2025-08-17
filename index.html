@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المركز الطبي المديني - لوحة التحكم</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">🏥</div>
+                <h1>المركز الطبي المديني</h1>
+            </div>
+            <div class="header-info">
+                <div class="datetime-display">
+                    <span id="currentDateTime"></span>
+                </div>
+                <div class="quick-actions">
+                    <button class="btn btn--sm emergency-btn" onclick="showAlert('تنبيه طوارئ')">🚨 طوارئ</button>
+                    <button class="btn btn--sm btn--outline">⚙️ إعدادات</button>
+                </div>
+                <div class="user-profile">
+                    <span>د. أحمد محمد</span>
+                    <div class="avatar">👨‍⚕️</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="overview">نظرة عامة تنفيذية</button>
+                <button class="nav-tab" data-tab="financial">المالية</button>
+                <button class="nav-tab" data-tab="quality">الجودة السريرية</button>
+                <button class="nav-tab" data-tab="operations">العمليات والموظفين</button>
+                <button class="nav-tab" data-tab="emergency">قسم الطوارئ</button>
+            </div>
+            <div class="nav-controls">
+                <select class="form-control" id="dateRange">
+                    <option value="today">اليوم</option>
+                    <option value="week">هذا الأسبوع</option>
+                    <option value="month" selected>هذا الشهر</option>
+                    <option value="quarter">هذا الربع</option>
+                    <option value="year">هذا العام</option>
+                </select>
+                <button class="btn btn--sm btn--outline">📊 تصدير التقرير</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Alerts Bar -->
+    <div class="alerts-bar" id="alertsBar">
+        <div class="alerts-container">
+            <div class="alert alert--warning">
+                <span>⚠️ وقت انتظار قسم الطوارئ أعلى من المستهدف (18.5 دقيقة)</span>
+            </div>
+            <div class="alert alert--critical">
+                <span>🔴 معدل دوران الموظفين الداعمين مرتفع (18.9%)</span>
+            </div>
+            <div class="alert alert--info">
+                <span>ℹ️ إشغال أسرة العناية المركزة مثالي (87.4%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Executive Overview Tab -->
+        <section class="tab-content active" id="overview">
+            <!-- Key Performance Indicators Section -->
+            <div class="section-header">
+                <h2>المؤشرات الرئيسية للأداء</h2>
+            </div>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon">🏥</div>
+                    <div class="kpi-content">
+                        <h3>إجمالي المرضى</h3>
+                        <div class="kpi-value">389</div>
+                        <div class="kpi-trend positive">↑ 2.3%</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">🛏️</div>
+                    <div class="kpi-content">
+                        <h3>معدل إشغال الأسرة</h3>
+                        <div class="kpi-value">86.4%</div>
+                        <div class="kpi-trend positive">↑ 1.2%</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">📈</div>
+                    <div class="kpi-content">
+                        <h3>الدخولات اليومية</h3>
+                        <div class="kpi-value">46/50</div>
+                        <div class="kpi-trend negative">↓ 8%</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">⭐</div>
+                    <div class="kpi-content">
+                        <h3>رضا المرضى</h3>
+                        <div class="kpi-value">4.6/5</div>
+                        <div class="kpi-trend positive">↑ 0.1</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-content">
+                        <h3>الأداء المالي</h3>
+                        <div class="kpi-value">92.3%</div>
+                        <div class="kpi-trend positive">↑ 3.5%</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">👥</div>
+                    <div class="kpi-content">
+                        <h3>استغلال الموظفين</h3>
+                        <div class="kpi-value">87.2%</div>
+                        <div class="kpi-trend neutral">→ 0%</div>
+                    </div>
+                </div>
+                <!-- Clinical Quality KPIs -->
+                <div class="kpi-card quality">
+                    <div class="kpi-icon">🏆</div>
+                    <div class="kpi-content">
+                        <h3>نقاط HCAHPS</h3>
+                        <div class="kpi-value">4.4/5</div>
+                        <div class="kpi-trend positive">↑ 0.2</div>
+                    </div>
+                </div>
+                <div class="kpi-card quality">
+                    <div class="kpi-icon">🦠</div>
+                    <div class="kpi-content">
+                        <h3>معدل العدوى</h3>
+                        <div class="kpi-value">1.8%</div>
+                        <div class="kpi-trend positive">↓ 0.3%</div>
+                    </div>
+                </div>
+                <div class="kpi-card quality">
+                    <div class="kpi-icon">💊</div>
+                    <div class="kpi-content">
+                        <h3>أخطاء الأدوية</h3>
+                        <div class="kpi-value">0.5%</div>
+                        <div class="kpi-trend positive">↓ 0.1%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Dashboard Section -->
+            <div class="section-header">
+                <h2>لوحة التحليلات والمخططات</h2>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>تدفق المرضى اليومي</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="dailyPatientFlowChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>أداء الأقسام</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="departmentChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>توزيع المرضى حسب القسم</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="patientsDistributionChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>انتظار قسم الطوارئ</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="edWaitTimeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Dashboard Tab -->
+        <section class="tab-content" id="financial">
+            <div class="kpi-grid">
+                <div class="kpi-card financial">
+                    <div class="kpi-icon">💵</div>
+                    <div class="kpi-content">
+                        <h3>إجمالي الإيرادات</h3>
+                        <div class="kpi-value">45.67M ريال</div>
+                        <div class="kpi-trend positive">↑ 5.2%</div>
+                    </div>
+                </div>
+                <div class="kpi-card financial">
+                    <div class="kpi-icon">📊</div>
+                    <div class="kpi-content">
+                        <h3>هامش التشغيل</h3>
+                        <div class="kpi-value">7.8%</div>
+                        <div class="kpi-trend positive">↑ 0.5%</div>
+                    </div>
+                </div>
+                <div class="kpi-card financial">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-content">
+                        <h3>صافي الدخل</h3>
+                        <div class="kpi-value">3.55M ريال</div>
+                        <div class="kpi-trend positive">↑ 8.1%</div>
+                    </div>
+                </div>
+                <div class="kpi-card financial">
+                    <div class="kpi-icon">🏦</div>
+                    <div class="kpi-content">
+                        <h3>أيام النقد المتاحة</h3>
+                        <div class="kpi-value">187 يوم</div>
+                        <div class="kpi-trend positive">↑ 12 يوم</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card large">
+                    <h3>الأداء المالي</h3>
+                    <div class="chart-container" style="position: relative; height: 400px;">
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/cb0baa9b99ed71e1527d7c7597aeb7c5/66bf202c-e05a-4b60-84be-cab83e955579/75b09b45.png" alt="الأداء المالي" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>التكلفة لكل تسريح</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="costPerDischargeChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>مزيج دافعي التأمين</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="payerMixChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clinical Quality Tab -->
+        <section class="tab-content" id="quality">
+            <div class="kpi-grid">
+                <div class="kpi-card quality">
+                    <div class="kpi-icon">🏆</div>
+                    <div class="kpi-content">
+                        <h3>نقاط HCAHPS</h3>
+                        <div class="kpi-value">4.4/5</div>
+                        <div class="kpi-trend positive">↑ 0.2</div>
+                    </div>
+                </div>
+                <div class="kpi-card quality">
+                    <div class="kpi-icon">🦠</div>
+                    <div class="kpi-content">
+                        <h3>معدل العدوى</h3>
+                        <div class="kpi-value">1.8%</div>
+                        <div class="kpi-trend positive">↓ 0.3%</div>
+                    </div>
+                </div>
+                <div class="kpi-card quality">
+                    <div class="kpi-icon">💊</div>
+                    <div class="kpi-content">
+                        <h3>أخطاء الأدوية</h3>
+                        <div class="kpi-value">0.5%</div>
+                        <div class="kpi-trend positive">↓ 0.1%</div>
+                    </div>
+                </div>
+                <div class="kpi-card quality">
+                    <div class="kpi-icon">🧼</div>
+                    <div class="kpi-content">
+                        <h3>النظافة الصحية</h3>
+                        <div class="kpi-value">94.5%</div>
+                        <div class="kpi-trend positive">↑ 1.2%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>مؤشرات السلامة</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="safetyMetricsChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>معدل الإعادة للمستشفى</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="readmissionChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>رضا المرضى حسب القسم</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="satisfactionByDeptChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>المقاييس الأساسية</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="coreMeasuresChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operations & Staffing Tab -->
+        <section class="tab-content" id="operations">
+            <div class="kpi-grid">
+                <div class="kpi-card operations">
+                    <div class="kpi-icon">👥</div>
+                    <div class="kpi-content">
+                        <h3>إجمالي الموظفين</h3>
+                        <div class="kpi-value">1,142</div>
+                        <div class="kpi-trend positive">↑ 3.2%</div>
+                    </div>
+                </div>
+                <div class="kpi-card operations">
+                    <div class="kpi-icon">🔄</div>
+                    <div class="kpi-content">
+                        <h3>معدل دوران الموظفين</h3>
+                        <div class="kpi-value">12.5%</div>
+                        <div class="kpi-trend negative">↑ 1.8%</div>
+                    </div>
+                </div>
+                <div class="kpi-card operations">
+                    <div class="kpi-icon">⏰</div>
+                    <div class="kpi-content">
+                        <h3>ساعات العمل الإضافية</h3>
+                        <div class="kpi-value">8.3%</div>
+                        <div class="kpi-trend neutral">→ 0.1%</div>
+                    </div>
+                </div>
+                <div class="kpi-card operations">
+                    <div class="kpi-icon">📚</div>
+                    <div class="kpi-content">
+                        <h3>إكمال التدريب</h3>
+                        <div class="kpi-value">92.1%</div>
+                        <div class="kpi-trend positive">↑ 4.5%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>استغلال المعدات</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/cb0baa9b99ed71e1527d7c7597aeb7c5/8dc85872-5397-46b6-9a3b-041e107202c8/61eae027.png" alt="استغلال المعدات" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>تصنيف الموظفين</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="staffCategoryChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>رضا الموظفين</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="staffSatisfactionChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>نسبة الموظفين للمرضى حسب القسم</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="staffRatioByDeptChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>تغطية الموظفين حسب الوردية</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="staffCoverageByShiftChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Department Tab -->
+        <section class="tab-content" id="emergency">
+            <div class="kpi-grid">
+                <div class="kpi-card emergency">
+                    <div class="kpi-icon">🚨</div>
+                    <div class="kpi-content">
+                        <h3>إجمالي الزيارات</h3>
+                        <div class="kpi-value">31,250</div>
+                        <div class="kpi-trend positive">↑ 5.8%</div>
+                    </div>
+                </div>
+                <div class="kpi-card emergency">
+                    <div class="kpi-icon">⏱️</div>
+                    <div class="kpi-content">
+                        <h3>وقت الوصول للطبيب</h3>
+                        <div class="kpi-value">18.5 دقيقة</div>
+                        <div class="kpi-trend negative">↑ 2.5 دقيقة</div>
+                    </div>
+                </div>
+                <div class="kpi-card emergency">
+                    <div class="kpi-icon">🏥</div>
+                    <div class="kpi-content">
+                        <h3>معدل الدخول</h3>
+                        <div class="kpi-value">18.6%</div>
+                        <div class="kpi-trend positive">↑ 1.2%</div>
+                    </div>
+                </div>
+                <div class="kpi-card emergency">
+                    <div class="kpi-icon">🚪</div>
+                    <div class="kpi-content">
+                        <h3>ترك دون رؤية</h3>
+                        <div class="kpi-value">3.8%</div>
+                        <div class="kpi-trend negative">↑ 0.3%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>مستويات التصنيف</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="triageChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>أوقات الانتظار</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="waitTimesChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>تدفق المرضى اليومي</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="edFlowChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>متوسط مدة الإقامة</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="lengthOfStayChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 المركز الطبي المديني - جميع الحقوق محفوظة</p>
+            <div class="footer-links">
+                <a href="#" target="_blank">المساعدة</a>
+                <a href="#" target="_blank">الدعم التقني</a>
+                <a href="#" target="_blank">سياسة الخصوصية</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
